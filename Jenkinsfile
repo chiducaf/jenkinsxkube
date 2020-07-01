@@ -42,7 +42,7 @@ pipeline {
       steps {
         container('go') {
           sh 'pwd'
-         {
+         
             checkout scm
 
             // ensure we're not on a detached head
