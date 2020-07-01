@@ -21,7 +21,6 @@ pipeline {
       steps {
         container('go') {
           sh 'pwd'
-           {
             checkout scm
             sh "make linux"
             sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
