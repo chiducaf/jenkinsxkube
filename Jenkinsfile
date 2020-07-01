@@ -20,13 +20,13 @@ pipeline {
       }
       steps {
         container('go') {
-          dir('/home/jenkins/go/src/github.com/chiducaf/jenkinsxkube') {
+          dir('/home/chidvminatos/jenkinsxkube') {
             checkout scm
             sh "make linux"
             sh "export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml"
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:$PREVIEW_VERSION"
           }
-          dir('/home/jenkins/go/src/github.com/chiducaf/jenkinsxkube/charts/preview') {
+          dir('/home/chidvminatos/jenkinsxkube/charts/preview') {
             sh "make preview"
             sh "jx preview --app $APP_NAME --dir ../.."
           }
@@ -39,7 +39,7 @@ pipeline {
       }
       steps {
         container('go') {
-          dir('/home/jenkins/go/src/github.com/chiducaf/jenkinsxkube') {
+          dir('/home/chidvminatos/jenkinsxkube') {
             checkout scm
 
             // ensure we're not on a detached head
@@ -63,7 +63,7 @@ pipeline {
       }
       steps {
         container('go') {
-          dir('/home/jenkins/go/src/github.com/chiducaf/jenkinsxkube/charts/jenkinsxkube') {
+          dir('/home/chidvminatos/jenkinsxkube/charts/jenkinsxkube') {
             sh "jx step changelog --version v\$(cat ../../VERSION)"
 
             // release the helm chart
